@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pycapse"
+version = "0.1.0"
+description = ""
+authors = ["Marco Bonici <bonici.marco@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pycapse", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+juliacall = "^0.9.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
