@@ -2,12 +2,14 @@ from juliacall import Main as jl
 import numpy as np
 
 jl.seval("using Capse")
+jl.seval("using AbstractEmulator")
 jl.seval("using SimpleChains")
 jl.seval("using BSON")
 jl.seval("using Static")
 
 __capse_compute_Cl = jl.seval('Capse.get_Cℓ')
 __load_emu_jl = jl.seval('BSON.load')
+__get_lgrid = jl.seval('Capse.get_ℓgrid')
 
 def compute_Cl(cosmo, emu):
     Xil = __capse_compute_Cl(jl.collect(cosmo), emu)
@@ -19,4 +21,4 @@ def load_emu(path):
     return emu
 
 def get_lgrid(emu):
-    return np.array(emu.ℓgrid)
+    return np.array(__get_lgrid(emu))
