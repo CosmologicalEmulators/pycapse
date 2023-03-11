@@ -12,8 +12,12 @@ __load_emu_jl = jl.seval('BSON.load')
 __get_lgrid = jl.seval('Capse.get_ℓgrid')
 
 def compute_Cl(cosmo, emu):
-    Xil = __capse_compute_Cl(jl.collect(cosmo), emu)
-    return np.array(Xil)
+    Cl = __capse_compute_Cl(jl.collect(cosmo), emu)
+    return np.array(Cl)
+
+def compute_Cl_vec(cosmo_vec, emu):
+    Cl = __capse_compute_Cl(jl.collect(np.transpose(cosmo_vec)), emu)
+    return np.array(Cl)
 
 def load_emu(path):
     loaded = __load_emu_jl(path)
