@@ -46,3 +46,6 @@ def init_emulator(NN_dict, weights, emu_kind):
 
 def cl_emulator(trained_emu, lgrid, InMinMax, OutMinMax):
     return __cl_emulator(trained_emu, lgrid, InMinMax, OutMinMax)
+
+def get_parameters_list(emu):
+    return emu.TrainedEmulator.Description["parameters"].split(", ")
