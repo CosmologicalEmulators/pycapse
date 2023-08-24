@@ -3,13 +3,8 @@ import juliacall as jc
 import numpy as np
 
 jl.seval("using Capse")
-#jl.seval("using AbstractEmulator")
-#jl.seval("using SimpleChains")
-#jl.seval("using BSON")
-#jl.seval("using Static")
 
 __capse_compute_Cl = jl.seval('Capse.get_Cℓ')
-#__load_emu_jl = jl.seval('BSON.load')
 __get_lgrid = jl.seval('Capse.get_ℓgrid')
 __get_emulator_description = jl.seval('Capse.get_emulator_description')
 simplechainsemulator = jl.seval('Capse.SimpleChainsEmulator')
@@ -21,6 +16,7 @@ def compute_Cl(cosmo, emu):
     Cl = __capse_compute_Cl(jl.collect(cosmo), emu)
     return np.array(Cl)
 
+#TODO #3 is this method needed?
 def compute_Cl_vec(cosmo_vec, emu):
     Cl = __capse_compute_Cl(jl.collect(np.transpose(cosmo_vec)), emu)
     return np.array(Cl)
