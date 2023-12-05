@@ -11,6 +11,7 @@ simplechainsemulator = jl.seval('Capse.SimpleChainsEmulator')
 luxemulator = jl.seval('Capse.LuxEmulator')
 __init_emulator = jl.seval('Capse.init_emulator')
 __cl_emulator = jl.seval('Capse.CℓEmulator')
+__load_emulator = jl.seval('Capse.load_emulator')
 
 def compute_Cl(cosmo, emu):
     Cl = __capse_compute_Cl(jl.collect(cosmo), emu)
@@ -29,8 +30,17 @@ def compute_Cl_vec(cosmo_vec, emu):
 def get_lgrid(emu):
     return np.array(__get_lgrid(emu))
 
+#def get_emulator_description(emu):
+#    __get_emulator_description(emu)
+
 def get_emulator_description(emu):
-    __get_emulator_description(emu)
+    input_dict = emu.TrainedEmulator.Description
+    print("The parameters the model has been trained are, in the following order: "+input_dict["parameters"]+".")
+    print("The emulator has been trained by "+input_dict["author"]+".")
+    print(input_dict["author"]+" email is "+input_dict["author_email"]+".")
+    print(input_dict["miscellanea"])
+
+    return None
 
 def nested_dict_convert(mydict):
     for key, value in mydict.items():
@@ -49,3 +59,10 @@ def cl_emulator(trained_emu, lgrid, InMinMax, OutMinMax):
 
 def get_parameters_list(emu):
     return emu.TrainedEmulator.Description["parameters"].split(", ")
+
+def load_emulator(path, emu = simplechainsemulator, weights_file = "weights.npy", inminmax_file = "inminmax.npy",
+    outminmax_file = "outminmax.npy", nn_setup_file = "nn_setup.json",
+    postprocessing_file = "postprocessing.jl"):
+    return __load_emulator(path, emu = emu, weights_file = weights_file, inminmax_file = inminmax_file,
+    outminmax_file = outminmax_file, nn_setup_file = nn_setup_file,
+    postprocessing_file = postprocessing_file)

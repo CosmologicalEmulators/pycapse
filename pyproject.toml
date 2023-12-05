@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycapse"
-version = "0.2.0"
+version = "0.2.1"
 description = ""
 authors = ["Marco Bonici <bonici.marco@gmail.com>"]
 readme = "README.md"
